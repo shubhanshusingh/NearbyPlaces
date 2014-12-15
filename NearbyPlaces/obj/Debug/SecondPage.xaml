@@ -11,7 +11,7 @@
     <Grid>
         <StackPanel>
             <TextBlock Name="PlaceNameTextBlock" Text="Place Name"/>
-            <Maps:MapControl Name="DisplayPlaceLocationMap" Height="325" MapServiceToken="MzmnDC9nSZa2rYoJm_uNzQ" />
+            <Maps:MapControl x:ConnectionId='1' Name="DisplayPlaceLocationMap" Height="325" MapServiceToken="MzmnDC9nSZa2rYoJm_uNzQ"                                         />
             <FlipView Height="300"/>
         </StackPanel>
     </Grid>

@@ -24,6 +24,9 @@ namespace NearbyPlaces
     /// </summary>
     public sealed partial class SecondPage : Page
     {
+        public string NameOfPlace;
+        public double lat;
+        public double lng;
         public SecondPage()
         {
             this.InitializeComponent();
@@ -36,19 +39,28 @@ namespace NearbyPlaces
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            PlaceNameTextBlock.Text = (e.Parameter as Places).NameOfPlace;
+            PlaceNameTextBlock.Text = (e.Parameter as Places).NameOfPlace + (e.Parameter as Places).PlaceLatitude + (e.Parameter as Places).PlaceLongitude;
+            NameOfPlace = (e.Parameter as Places).NameOfPlace;
+            lat = (e.Parameter as Places).PlaceLatitude;
+            lng = (e.Parameter as Places).PlaceLongitude;
+            
+
+        }
+
+        private void DisplayPlaceLocationMap_Loaded(object sender, RoutedEventArgs e)
+        {
             MapIcon MapIcon1 = new MapIcon();
             MapIcon1.Location = new Geopoint(new BasicGeoposition()
             {
-                Latitude = (e.Parameter as Places).PlaceLatitude,
-                Longitude = (e.Parameter as Places).PlaceLongitude
+                Latitude = lat,
+                Longitude = lng
             });
             MapIcon1.NormalizedAnchorPoint = new Point(0.5, 1.0);
-            MapIcon1.Title = (e.Parameter as Places).NameOfPlace;
+            MapIcon1.Title =NameOfPlace;
             DisplayPlaceLocationMap.MapElements.Add(MapIcon1);
             DisplayPlaceLocationMap.Center = MapIcon1.Location;
-            DisplayPlaceLocationMap.ZoomLevel = 12;
-            DisplayPlaceLocationMap.LandmarksVisible = true;
+            DisplayPlaceLocationMap.ZoomLevel = 17;
+            //DisplayPlaceLocationMap.LandmarksVisible = true;
 
         }
     }
