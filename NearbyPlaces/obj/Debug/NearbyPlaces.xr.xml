@@ -50,13 +50,18 @@
       <RootProperty Name="HeaderTemplate" />
     </RootType>
     <RootType FullName="NearbyPlaces.MainPage" />
+    <RootType FullName="Windows.UI.Xaml.Controls.Canvas">
+      <RootMethod Name="GetZIndex" />
+      <RootMethod Name="SetZIndex" />
+    </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Maps.MapControl">
       <RootProperty Name="Name" />
       <RootProperty Name="Height" />
       <RootProperty Name="MapServiceToken" />
       <RootEvent Name="Loaded" />
     </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.FlipView">
+    <RootType FullName="Windows.UI.Xaml.Controls.Image">
+      <RootProperty Name="Name" />
       <RootProperty Name="Height" />
     </RootType>
     <RootType FullName="NearbyPlaces.SecondPage" />

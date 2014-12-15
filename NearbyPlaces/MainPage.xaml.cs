@@ -61,7 +61,7 @@ namespace NearbyPlaces
             Task getUserLocationAndNearbyPlaces = new Task(OnGetUserLocationAndNearbyPlacesStart);
             getUserLocationAndNearbyPlaces.Start();
 
-
+            
 
             // TODO: Prepare page for display here.
 
@@ -113,6 +113,7 @@ namespace NearbyPlaces
         async private void OnGetUserLocationAndNearbyPlacesStart()
         {
             PlacesDictionary = new Dictionary<string, Places>();
+            PlacesDictionary.Clear();
             Geoposition GeoPos = await App.Locator.GetGeopositionAsync();
             //GeoCoordinate GeoCoord = new GeoCoordinate(GeoPos.Coordinate.Point.Position.Latitude,GeoPos.Coordinate.Point.Position.Longitude);
 
@@ -129,7 +130,7 @@ namespace NearbyPlaces
             //try
             //{
             JsonResults = await clientToFetchNearbyPlaces.GetStringAsync(rUri);
-
+            // Debug.WriteLine(JsonResults);
             //}
             //catch (Exception ex)
             //{
@@ -139,6 +140,7 @@ namespace NearbyPlaces
 
             JObject test = JObject.Parse(JsonResults);
             JArray placesArray = JArray.Parse(test["results"].ToString());
+
             // var placesArray =   from p in test["results"]
             //                     select p;
             //JObject results =(JObject)test["results"];
@@ -148,7 +150,7 @@ namespace NearbyPlaces
 
 
             //UserLocationBlock.Text = UserLocationLatitude + UserLocationLongitude;
-            
+
 
             foreach (var place in placesArray)
             {
@@ -156,6 +158,29 @@ namespace NearbyPlaces
                 nearbyPlace.PlaceID = place.SelectToken("place_id").ToString();
                 nearbyPlace.NameOfPlace = place.SelectToken("name").ToString();
                 nearbyPlace.AddressOfThePlace = place.SelectToken("vicinity").ToString();
+
+                try
+                {
+                    JArray testPhotosArray = JArray.Parse(place.SelectToken("photos").ToString());
+                    Debug.WriteLine(testPhotosArray.ToString());
+                    foreach (var photo in testPhotosArray)
+                    {
+                        Debug.WriteLine(photo.SelectToken("photo_reference").ToString());
+                        string photoref = photo.SelectToken("photo_reference").ToString();
+                        if (photoref != null)
+                        {
+                            nearbyPlace.PhotoReference = photoref;
+                        }
+                        else
+                        { nearbyPlace.PhotoReference = "PhotoNotAvailable"; }
+
+                    }
+
+                }
+                catch
+                {
+                }
+
                 IList<string> placeTypes = place.SelectToken("types").Select(t => (string)t).ToList();
                 StringBuilder typesOfPlaceString = new StringBuilder();
 
@@ -173,7 +198,9 @@ namespace NearbyPlaces
                 double distance = DistanceTo(Convert.ToDouble(UserLocationLatitude), Convert.ToDouble(UserLocationLongitude), placeLat, placeLong);
                 nearbyPlace.DistanceFromCurrentLocation = Math.Round(distance, 2).ToString() + " KM";
                 PlacesDictionary.Add(nearbyPlace.PlaceID, nearbyPlace);
+
                 listOfPlaces.Add(nearbyPlace);
+
 
             }
             await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.High, () =>
@@ -186,7 +213,7 @@ namespace NearbyPlaces
             });
         }
 
-       
+
 
         private void StackPanel_Tapped(object sender, TappedRoutedEventArgs e)
         {

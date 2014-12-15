@@ -25,11 +25,13 @@ namespace NearbyPlaces
         public Double PlaceLongitude
         {
             get { return placeLongitude; }
-            set { placeLongitude = value;
-            NotifyPropertyChanged("PlaceLongitude");
+            set
+            {
+                placeLongitude = value;
+                NotifyPropertyChanged("PlaceLongitude");
             }
         }
-        
+
 
         private string placeId;
 
@@ -88,6 +90,18 @@ namespace NearbyPlaces
             {
                 addressOfThePlace = value;
                 NotifyPropertyChanged("AddressOfThePlace");
+            }
+        }
+
+        private string photoReference;
+
+        public string PhotoReference
+        {
+            get { return photoReference; }
+            set
+            {
+                photoReference = value;
+                NotifyPropertyChanged("PhotoReference");
             }
         }
 

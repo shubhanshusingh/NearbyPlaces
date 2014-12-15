@@ -10,9 +10,11 @@
 
     <Grid>
         <StackPanel>
+            <ProgressRing IsActive="False" Name="fetchImageProgress" Canvas.ZIndex="1"/>
             <TextBlock Name="PlaceNameTextBlock" Text="Place Name"/>
             <Maps:MapControl x:ConnectionId='1' Name="DisplayPlaceLocationMap" Height="325" MapServiceToken="MzmnDC9nSZa2rYoJm_uNzQ"                                         />
-            <FlipView Height="300"/>
+            <TextBlock Name="ImageInfo" Text=""/>
+            <Image Height="210" Name="PlaceImageView" />
         </StackPanel>
     </Grid>
 </Page>
