@@ -51,7 +51,7 @@ namespace NearbyPlaces
             if ((e.Parameter as Places).PhotoReference != null)
             {
                 photoRef = (e.Parameter as Places).PhotoReference;
-                ImageInfo.Text = "PHOTO";
+                ImageInfo.Text = "PHOTO: Fetching Image,Please Wait";
                 fetchImageProgress.IsActive = true;
                 Task getImageFromHttpClient = new Task(OnGetImageFromHttpClient);
                 getImageFromHttpClient.Start();
@@ -84,8 +84,8 @@ namespace NearbyPlaces
           {
               //WriteableBitmap wBmp = BitmapFactory.New(400, 800).FromByteArray(imageByteArray);
               BitmapImage img = new BitmapImage();
-              img.DecodePixelWidth = 250;
-              img.DecodePixelHeight = 250;
+              //img.DecodePixelWidth = 250;
+              //img.DecodePixelHeight = 250;
               using(MemoryStream stream = new MemoryStream(imageByteArray))
               {
                   Debug.WriteLine("using memorystream");
@@ -99,6 +99,7 @@ namespace NearbyPlaces
               PlaceImageView.Source = img;
               }
               fetchImageProgress.IsActive = false;
+              ImageInfo.Text = "PHOTO";
           });
 
           Debug.WriteLine("Dispatcher Exit");

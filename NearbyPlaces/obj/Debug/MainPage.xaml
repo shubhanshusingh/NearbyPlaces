@@ -12,8 +12,12 @@
     </Page.Resources>-->
     <Grid>
         <StackPanel Name="ListOfResults"  ScrollViewer.VerticalScrollBarVisibility="Auto">
-            <ProgressRing IsActive="False" Name="fetchNearbyProgress"/>
-            <TextBlock Name="UserLocationBlock"/>
+            
+            <StackPanel Orientation="Horizontal">
+                
+                <TextBlock FontSize="15" TextAlignment="Center" Name="UserLocationBlock"/>
+                <ProgressRing IsActive="False" Name="fetchNearbyProgress"/>
+            </StackPanel>
             <ListView Height="530" Name="ListViewOfNearbyPlaces">
                 <ListView.ItemTemplate>
                     <DataTemplate>

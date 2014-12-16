@@ -56,7 +56,7 @@ namespace NearbyPlaces
         {
             //App.Locator.PositionChanged += Locator_PositionChanged;
             fetchNearbyProgress.IsActive = true;
-
+            UserLocationBlock.Text = "Fetching User Location & Nearby Places";
 
             Task getUserLocationAndNearbyPlaces = new Task(OnGetUserLocationAndNearbyPlacesStart);
             getUserLocationAndNearbyPlaces.Start();
@@ -208,7 +208,7 @@ namespace NearbyPlaces
                 UserLocationBlock.Text = GeoPos.Coordinate.Point.Position.Latitude.ToString() + ", " + GeoPos.Coordinate.Point.Position.Longitude.ToString();
                 // CollectionOfPlaces.Source = listOfPlaces;
                 ListViewOfNearbyPlaces.ItemsSource = listOfPlaces;
-
+                UserLocationBlock.Text = "Nearby Places";
                 fetchNearbyProgress.IsActive = false;
             });
         }

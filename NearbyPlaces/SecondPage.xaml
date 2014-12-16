@@ -10,11 +10,14 @@
 
     <Grid>
         <StackPanel>
-            <ProgressRing IsActive="False" Name="fetchImageProgress" Canvas.ZIndex="1"/>
-            <TextBlock Name="PlaceNameTextBlock" Text="Place Name"/>
-            <Maps:MapControl Name="DisplayPlaceLocationMap" Height="325" MapServiceToken="MzmnDC9nSZa2rYoJm_uNzQ" Loaded="DisplayPlaceLocationMap_Loaded" />
-            <TextBlock Name="ImageInfo" Text=""/>
-            <Image Height="210" Name="PlaceImageView" />
+            <StackPanel Orientation="Horizontal">
+               <TextBlock FontSize="40" TextAlignment="Center" Name="PlaceNameTextBlock" Text="Place Name"/>
+               <ProgressRing Height="25" Width="25" IsActive="False" Name="fetchImageProgress"/>
+
+            </StackPanel>
+            <Maps:MapControl Name="DisplayPlaceLocationMap" Height="225" MapServiceToken="MzmnDC9nSZa2rYoJm_uNzQ" Loaded="DisplayPlaceLocationMap_Loaded" />
+            <TextBlock FontSize="20" Name="ImageInfo" Text=""/>
+            <Image Height="340" Name="PlaceImageView" />
         </StackPanel>
     </Grid>
 </Page>
